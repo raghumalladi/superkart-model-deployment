@@ -1,14 +1,13 @@
----
-title: SuperKart Sales Forecaster
-emoji: 🛒
-colorFrom: blue
-colorTo: green
-sdk: docker
-app_port: 8501
-pinned: false
----
-
 # SuperKart Sales Forecaster (Streamlit frontend)
 
-Simple UI for single and batch (CSV) sales predictions. It calls the decoupled Flask
-backend whose base URL is read from the `BACKEND_URL` environment / Space variable.
+Interactive UI for single and batch (CSV) sales predictions. It collects the raw product and store
+attributes, derives the engineered features exactly as in training, and calls the decoupled Flask
+backend. The backend address comes from the `BACKEND_URL` environment variable (`http://backend:7860`
+on the shared Docker network) - nothing is hard-coded. Runs on port **8501**.
+
+## Build and run
+
+```bash
+docker build -t superkart-frontend .
+docker run -d --name superkart-frontend --network superkart-net -p 8501:8501 -e BACKEND_URL=http://backend:7860 superkart-frontend
+```
