@@ -1,7 +1,7 @@
 # SuperKart Flask backend - serves the serialized sklearn/XGBoost pipeline on port 7860
 FROM python:3.13-slim
 
-# Hugging Face Spaces runs containers as a non-root user (uid 1000); mirror that locally.
+# Run as a non-root user (uid 1000), as hosted container platforms expect.
 RUN useradd -m -u 1000 user
 USER user
 ENV HOME=/home/user \
