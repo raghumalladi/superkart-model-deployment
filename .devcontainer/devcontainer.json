@@ -1,10 +1,6 @@
 {
   "name": "SuperKart Model Deployment",
-  "image": "mcr.microsoft.com/devcontainers/python:3.13",
-  "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
-    "ghcr.io/devcontainers/features/github-cli:1": {}
-  },
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
   "forwardPorts": [7860, 8501],
   "portsAttributes": {
     "7860": { "label": "SuperKart backend (Flask API)", "onAutoForward": "notify" },
