@@ -1,0 +1,33 @@
+# Local two-container smoke test mirroring the decoupled deployment.
+#   docker compose up --build -d
+#   backend  -> http://localhost:7860
+#   frontend -> http://localhost:8501
+services:
+  backend:
+    build: ./backend_files
+    image: superkart-backend:dev
+    container_name: superkart-backend
+    ports:
+      - "7860:7860"
+    networks: [superkart-net]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request;urllib.request.urlopen('http://localhost:7860/')"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+
+  frontend:
+    build: ./frontend_files
+    image: superkart-frontend:dev
+    container_name: superkart-frontend
+    environment:
+      BACKEND_URL: http://backend:7860
+    ports:
+      - "8501:7860"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks: [superkart-net]
+
+networks:
+  superkart-net:
