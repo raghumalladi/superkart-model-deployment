@@ -29,7 +29,7 @@ docker build -t superkart-frontend ./frontend_files
 echo "==> starting containers"
 docker run -d --name superkart-backend  --network "$NET" --network-alias backend -p 7860:7860 superkart-backend
 # The frontend reaches the backend through the Docker network name, never through a hard-coded URL
-docker run -d --name superkart-frontend --network "$NET" -p 8501:7860 -e BACKEND_URL=http://backend:7860 superkart-frontend
+docker run -d --name superkart-frontend --network "$NET" -p 8501:8501 -e BACKEND_URL=http://backend:7860 superkart-frontend
 
 sleep 5
 docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
