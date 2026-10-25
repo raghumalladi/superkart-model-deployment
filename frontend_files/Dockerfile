@@ -10,8 +10,8 @@ ENV HOME=/home/user \
 
 WORKDIR $HOME/app
 
-# Optional BuildKit secret "pip_ca": trusts a corporate proxy CA during local builds only
-# (docker build --secret id=pip_ca,src=ca.pem ...). Absent on Hugging Face.
+# Optional BuildKit secret "pip_ca": trusts a corporate proxy CA during local laptop builds only
+# (docker build --secret id=pip_ca,src=ca.pem ...). Absent in GitHub Codespaces, where pip uses its defaults.
 COPY --chown=user requirements.txt .
 RUN --mount=type=secret,id=pip_ca,uid=1000,mode=0400 \
     if [ -f /run/secrets/pip_ca ]; then export PIP_CERT=/run/secrets/pip_ca; fi && \
@@ -21,6 +21,6 @@ COPY --chown=user . .
 
 EXPOSE 8501
 
-# XSRF protection is disabled so the file uploader works behind the Hugging Face reverse proxy
+# XSRF protection is disabled so the file uploader works behind a reverse proxy (the Codespaces port forwarder)
 CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0", \
      "--server.headless=true", "--server.enableXsrfProtection=false"]
