@@ -5,7 +5,7 @@ Decoupled deployment of a tuned XGBoost sales-forecasting pipeline:
 | Folder | What | Port |
 |---|---|---|
 | `backend_files/` | Flask REST API (`POST /v1/predict`, `POST /v1/predictbatch`) + serialized model + Dockerfile | 7860 |
-| `frontend_files/` | Streamlit UI (single and batch prediction) + Dockerfile | 8501 (host) → 7860 (container) |
+| `frontend_files/` | Streamlit UI (single and batch prediction) + Dockerfile | 8501 |
 
 The frontend finds the backend through the `BACKEND_URL` environment variable
 (`http://backend:7860` on the shared Docker network), so no URL is hard-coded.
