@@ -19,8 +19,8 @@ RUN --mount=type=secret,id=pip_ca,uid=1000,mode=0400 \
 
 COPY --chown=user . .
 
-EXPOSE 7860
+EXPOSE 8501
 
 # XSRF protection is disabled so the file uploader works behind the Hugging Face reverse proxy
-CMD ["streamlit", "run", "app.py", "--server.port=7860", "--server.address=0.0.0.0", \
+CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0", \
      "--server.headless=true", "--server.enableXsrfProtection=false"]
