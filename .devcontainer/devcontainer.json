@@ -1,0 +1,14 @@
+{
+  "name": "SuperKart Model Deployment",
+  "image": "mcr.microsoft.com/devcontainers/python:3.13",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "forwardPorts": [7860, 8501],
+  "portsAttributes": {
+    "7860": { "label": "SuperKart backend (Flask API)", "onAutoForward": "notify" },
+    "8501": { "label": "SuperKart frontend (Streamlit)", "onAutoForward": "notify" }
+  },
+  "postAttachCommand": "echo 'SuperKart: run  bash run.sh  to build and start the backend and frontend containers.'"
+}
