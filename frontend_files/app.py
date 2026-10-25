@@ -185,7 +185,8 @@ with tab_batch:
                 if resp.status_code == 200:
                     body = resp.json()
                     result = batch_df.copy()
-                    result["Predicted_Sales"] = [body[str(i)] for i in range(len(result))]
+                    # Prediction goes first so it is visible without horizontal scrolling
+                    result.insert(0, "Predicted_Sales", [body[str(i)] for i in range(len(result))])
                     st.session_state["batch_result"] = result
                     st.session_state["batch_warnings"] = body.get("warnings", [])
                     st.session_state["batch_status"] = resp.status_code
