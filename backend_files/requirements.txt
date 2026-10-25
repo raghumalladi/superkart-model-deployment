@@ -3,5 +3,7 @@ gunicorn==26.2.0
 pandas==3.0.4
 numpy==2.5.0
 scikit-learn==1.9.0
-xgboost==3.3.0
+# xgboost: same version everywhere; the CPU-only wheel on Linux avoids a 350 MB CUDA dependency the model does not use
+xgboost==3.3.0; sys_platform == "win32"
+xgboost-cpu==3.3.0; sys_platform != "win32"
 joblib==1.5.3
